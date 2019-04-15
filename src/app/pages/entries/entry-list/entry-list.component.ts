@@ -1,30 +1,30 @@
 import {Component, OnInit} from '@angular/core';
-import {CategoryService} from '../shared/category.service';
-import {Category} from '../shared/category.model';
+import {EntryService} from '../shared/entry.service';
+import {Entry} from '../shared/entry.model';
 
 @Component({
-  selector: 'app-category-list',
-  templateUrl: './category-list.component.html',
-  styleUrls: ['./category-list.component.css']
+  selector: 'app-entry-list',
+  templateUrl: './entry-list.component.html',
+  styleUrls: ['./entry-list.component.css']
 })
-export class CategoryListComponent implements OnInit {
+export class EntryListComponent implements OnInit {
 
-  categories: Category[] = [];
+  entries: Entry[] = [];
 
-  constructor(private categoryService: CategoryService) { }
+  constructor(private entryService: EntryService) { }
 
   ngOnInit() {
-    this.categoryService.getAll().subscribe(
-      categories => this.categories = categories,
+    this.entryService.getAll().subscribe(
+      entries => this.entries = entries.sort((a,b) => b.id - a.id),
       error => alert('Erro ao carregar a lista')
     );
   }
 
-  deleteCategory(category) {
+  deleteEntry(entry) {
     const mustDelete = confirm('Deseja realmente excluir este item?');
     if ( mustDelete) {
-      this.categoryService.delete(category.id).subscribe(
-        () => this.categories = this.categories.filter(element => element !== category)
+      this.entryService.delete(entry.id).subscribe(
+        () => this.entries = this.entries.filter(element => element !== entry)
       );
     }
   }
