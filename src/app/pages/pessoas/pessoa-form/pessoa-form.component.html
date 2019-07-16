@@ -1,0 +1,118 @@
+<app-bread-crumb
+  [items] = "[
+    { text: 'Pessoas', link: '/pessoas' },
+    { text: pageTitle }
+  ]"
+>
+</app-bread-crumb>
+<app-page-header
+  [page-title]="pageTitle"
+  button-text="<< Voltar"
+  button-link="/pessoas"
+  button-class="btn-light"
+></app-page-header>
+
+<app-server-error-messages [server-error-messages]="serverErrorMessages"
+></app-server-error-messages>
+
+<form [formGroup]="resourceForm" (submit)="submitForm()">
+
+  <div class="card">
+    <div class="card-header">
+      Informações Pessoa
+    </div>
+
+    <div class="card-body">
+      <div class="form-row">
+
+        <!--Nome-->
+        <div class="form-group col-md-6">
+          <label for="nome">Nome</label>
+          <input type="text" class="form-control" id="nome" formControlName="nome">
+          <app-form-field-error
+            [form-control]="resourceForm.get('nome')"
+          ></app-form-field-error>
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="email">Email</label>
+          <input type="text" class="form-control" id="email" formControlName="email">
+          <app-form-field-error
+            [form-control]="resourceForm.get('email')"
+          ></app-form-field-error>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="cpf">CPF</label>
+          <input type="text" class="form-control" id="cpf" formControlName="cpf">
+          <app-form-field-error
+            [form-control]="resourceForm.get('cpf')"
+          ></app-form-field-error>
+        </div>
+        <!-- date -->
+        <div class="form-group col-md-2">
+          <label for="dataNascimento"> Data Nascimento</label>
+          <br>
+          <p-calendar
+            id="dataNascimento"
+            formControlName="dataNascimento"
+            inputStyleClass="form-control"
+            dataType="string"
+            dateFormat="yy-mm-dd"
+            [locale]="ptBR"
+            [showButtonBar]="true">
+          </p-calendar>
+          <app-form-field-error
+            [form-control]="resourceForm.get('dataNascimento')"
+          ></app-form-field-error>
+        </div>
+
+        <!--Sexo-->
+        <!--
+        <div class="form-group col-md-6">
+          <label for="sexo">Sexo</label>
+          <select type="text" class="form-control" id="sexo" formControlName="sexo">
+            <option  *ngFor="let option of typeOptions" [value]="option.value"> {{ option.text }}</option>
+          </select>
+          <app-form-field-error
+            [form-control]="resourceForm.get('sexo')"
+          ></app-form-field-error>
+        </div>
+        -->
+        <!--Naturalidade-->
+        <div class="form-group col-md-6">
+          <label for="sexo">sexo</label>
+          <input type="text" class="form-control" id="sexo" formControlName="sexo">
+          <app-form-field-error
+            [form-control]="resourceForm.get('sexo')"
+          ></app-form-field-error>
+        </div>
+
+        <!--Naturalidade-->
+        <div class="form-group col-md-6">
+          <label for="naturalidade">Naturalidade</label>
+          <input type="text" class="form-control" id="naturalidade" formControlName="naturalidade">
+          <app-form-field-error
+            [form-control]="resourceForm.get('naturalidade')"
+          ></app-form-field-error>
+        </div>
+
+        <!--Nome-->
+        <div class="form-group col-md-6">
+          <label for="nacionalidade">Nacionalidade</label>
+          <input type="text" class="form-control" id="nacionalidade" formControlName="nacionalidade">
+          <app-form-field-error
+            [form-control]="resourceForm.get('nacionalidade')"
+          ></app-form-field-error>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+  <button [disabled]="submittingForm || resourceForm.invalid" type="submit"
+          class="btn btn-primary btn-lg float-right mt-3">
+    Salvar
+  </button>
+</form>
+<!--<pre>{{resourceForm.value | json }}</pre>-->

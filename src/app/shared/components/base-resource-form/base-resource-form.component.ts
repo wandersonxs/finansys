@@ -123,10 +123,11 @@ export abstract class BaseResourceFormComponent<T extends BaseResourceModel> imp
   protected actionsForErrors(error) {
     toastr.error('Ocorreu um erro ao processar sua solicitação!');
     this.submittingForm = false;
-    if (error.status === 422) {
-      this.serverErrorMessages = JSON.parse(error._body);
+    if (error.status === 409 || error.status === 422 || error.status === 400  ) {
+      //this.serverErrorMessages = JSON.parse(error._body);
+      this.serverErrorMessages =  [error.error.details]; //JSON.parse(error.error.details);
     } else {
-      this.serverErrorMessages = ['Falha na comunicação com o servidor. Por favor, tente mais tarde.']
+      this.serverErrorMessages = ['Falha na comunicação com o servidor. Por favor, tente mais tarde.'];
     }
   }
 

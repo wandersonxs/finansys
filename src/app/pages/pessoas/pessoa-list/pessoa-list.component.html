@@ -1,0 +1,38 @@
+<app-bread-crumb [items] = "[{ text: 'Pessoas' }]">
+</app-bread-crumb>
+<app-page-header
+  page-title="Pessoas"
+  button-text="+ Novo"
+  button-link="new"
+  button-class="btn-success"
+></app-page-header>
+
+<table class="table table-hover">
+  <thead>
+  <tr class="bg-primary text-light">
+    <th>Nome</th>
+    <th>CPF</th>
+    <th>Email</th>
+    <th>Sexo</th>
+    <th>Data Nasc.</th>
+    <th>Naturalidade</th>
+    <th>Nacionalidade</th>
+    <th class="text-center">Ações</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let pessoa of resources">
+    <td><small>{{pessoa.nome}}</small></td>
+    <td><small>{{pessoa.cpf}}</small></td>
+    <td><small>{{pessoa.email}}</small></td>
+    <td><small>{{pessoa.sexo}}</small></td>
+    <td><small>{{pessoa.dataNascimento | date}}</small></td>
+    <td><small>{{pessoa.naturalidade}}</small></td>
+    <td><small>{{pessoa.nacionalidade}}</small></td>
+    <td class="text-center">
+      <a [routerLink]="[pessoa.id,'edit']" class="btn btn-outline-info btn-sm mr-2">Editar</a>
+      <button (click)="deleteResource(pessoa)" class="btn btn-outline-danger btn-sm ">Excluir</button>
+    </td>
+  </tr>
+  </tbody>
+</table>
